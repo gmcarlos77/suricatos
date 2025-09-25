@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/pag-compra.css') }}">
+
+  <title>catalogo</title>
+</head>
+
+<body>
+
+  <div class="navdiv">
+    <div class="header-inner-content">
+      <h1 class="logo">Toca <span>Literaria</span></h1>
+
+      <nav>
+        <ul>
+          <li><a href="inicial.html">Home</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="em-breve.html">Conta</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-icon-container">
+        <img src="cart.png" />
+        <img src="menu.png" class="menu-button" />
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="product-details">
+      <div class="product-gallery">
+        <img src="/storage/emulated/0/livraria/static/img/
+goggins.png" alt="nada pode me ferir" />
+      </div>
+      <div class="product-info">
+        <h2>NADA PODE ME FERIR</h2>
+        <p class="product-code">Código do Produto: 98765XYZ</p>
+        <p class="price">R$ 50,00</p>
+        <p class="rating">&#9733; &#9733; &#9733; &#9733;&#9734; 45 avaliações</p>
+        <p class="product-description">
+          David Goggins é Navy SEAL aposentado e o
+          único integrante das Forças Armadas dos
+          Estados Unidos a ter concluído o treinamento
+          das três principais tropas de elite. Já competiu
+          em mais de 60 ultramaratonas, triatlos e ultratriatlos,
+          batendo recordes de prova e terminando regularmente entre
+          os cinco primeiros. Ex-recordista mundial do Guinness por t
+          er feito 4.030 repetições na barra fixa em 17 horas, é um requisitado
+          palestrante que já compartilhou sua história com os funcionários de empresas
+          Fortune 500, times esportivos profissionais e centenas de estudantes de todo o país.
+        </p>
+        <div class="product-options">
+          <label for="quantity">Quantidade:</label>
+          <input type="number" id="quantity" value="1" />
+        </div>
+        <div class="buttons">
+          <button id="btn-comprar" class="add-to-cart" type="button">
+            <i class="fas fa-shopping-cart"></i> compre agora
+          </button>
+        </div>
+        <div class="buttons">
+          <button id="btn-comprar" class="add-to-cart" type="button">
+            <i class="fas fa-shopping-cart"></i> adicione no carrinho
+          </button>
+        </div>
+        <p class="delivery">
+          <i class="fas fa-truck"></i> Estimativa de Entrega: Consulte nossos
+          Termos e Condições
+        </p>
+      </div>
+    </div>
+    <div class="product-specs">
+
+      <div class="specs-content">
+        <div>
+          <p><strong>SKU:</strong> LIVRO98765</p>
+          <p><strong>Tipo:</strong> capa dura</p>
+          <p><strong>autor:</strong> David Goggins</p>
+          <p><strong>gênero:</strong> Desenvolvimento Pessoal</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const navdiv = document.querySelector(".navdiv");
+    const menuButton = document.querySelector(".menu-button");
+
+    menuButton.addEventListener("click", () => {
+      navdiv.classList.toggle("show-menu");
+    });
+
+    // Redireciona quando clicar no botão inteiro
+    document.getElementById("btn-comprar").addEventListener("click", function () {
+      window.location.href = "checkout.html"; // coloque aqui o caminho da página desejada
+    });
+  </script>
+</body>
+
+</html>
