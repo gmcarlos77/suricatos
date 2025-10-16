@@ -1,0 +1,135 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_inicial.css') }}">
+    <title>Catálogo</title>
+</head>
+<body>
+    <!-- Navegação -->
+    <div class="navdiv">
+        <div class="header-inner-content">
+            <h1 class="logo">Toca <span>Literaria</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('login.tela_login') }}">usuario</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icon-container">
+                <a href="em-breve.html"><img src="{{ url_for('static', filename='img/cart.png') }}"></a>
+                <img src="menu.png" class="menu-button">
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header--inner-content">
+            <div class="header-bottom-side">
+                <div class="header-bottom-side-left">
+                    <h2>LEIA, APRENDA, DESCUBRA.</h2>
+                    <p>
+                        Explore um acervo completo de livros, tudo ao seu alcance
+                        a qualquer hora e em qualquer lugar. Aqui, o conhecimento está a apenas
+                        um clique de distância. Boa leitura!
+                    </p>
+                    <button id="rolar">ver agora</button>
+                </div>
+                <div class="header-bottom-side-right">
+                    <img src="{{ url_for('static', filename='img/harry.png') }}">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção livros dinâmica -->
+        <div class="page-inner-content">
+            <h3 class="section-title"><a href="">Início</a></h3>
+            <div class="subtitle-underline"></div>
+
+            <div class="products-container">
+                {% for livro in livros %}
+                    <div class="product">
+                        <img src="{{ url_for('static', filename='img/' + livro.imagem) }}" alt="{{ livro.titulo }}">
+                        <h1>{{ livro.titulo }}</h1>
+                        <h3>Preço: R$ {{ (livro.preco) }}</h3>
+                    </div>
+                {% else %}
+                    <p class="aviso">Nenhum livro encontrado.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <!-- Seção Exclusivo -->
+        <div class="gray-background">
+            <div class="page-inner-content">
+                <div class="header-bottom-side exclusive-container">
+                    <div class="header-bottom-side-left">
+                        <h2 class="mind">EXCLUSIVO</h2>
+                        <p class="mindp">
+                            Transforme sua mentalidade a partir
+                            de novas perspectivas: fixa e progressiva
+                        </p>
+                        <button onclick="buttonMindset()">ver agora</button>
+                    </div>
+                    <div class="header-bottom-side-right">
+                        <img src="{{ url_for('static', filename='img/mind.png') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="espaco">ㅤ</div>
+        <div class="espaco">ㅤ</div>
+        <div class="espaco">ㅤ</div>
+        <div class="espaco">ㅤ</div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="gray-background">
+        <div class="page-inner-content footer-content">
+            <div class="logo-footer">
+                <h1 class="logo">Toca <span>Literaria</span></h1>
+                <br>
+                <p>A MELHOR LIVRARIA DO BRASIL</p>
+                <br>
+            </div>
+            <div class="links-footer">
+                <h3>Links úteis</h3>
+                <ul>
+                    <li><a href="em-breve.html">Cupons</a></li>
+                    <li><a href="em-breve.html">Blog Posts</a></li>
+                    <li><a href="em-breve.html">Políticas</a></li>
+                    <li><a href="em-breve.html">Sobre</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const navdiv = document.querySelector(".navdiv")
+        const menuButton = document.querySelector(".menu-button")
+
+        menuButton.addEventListener("click",() =>{
+            navdiv.classList.toggle("show-menu");
+        })
+
+        const botaoRolar = document.getElementById('rolar');
+        botaoRolar.addEventListener('click', function() {
+            const posicaoAtual = window.pageYOffset;
+            const alturaJanela = window.innerHeight;
+            const destino = posicaoAtual + (alturaJanela * 2.67);
+            window.scrollTo({ top: destino, behavior: 'smooth' });
+        });
+
+        function buttonMindset() {
+            window.location.href = "mindset.html";
+        }
+    </script>
+</body>
+</html>

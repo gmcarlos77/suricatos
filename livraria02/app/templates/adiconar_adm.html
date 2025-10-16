@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>pagina ADM - adição de livros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adicionar.css') }}">
+  </head>
+  <body>
+    <div>
+        <h1 id="title">cadastro de livros</h1>
+        <br>
+    </div>
+  <form action="{{ url_for('adm.registro_livro') }}" method="post">
+    <div class="campo">
+        <label>titulo do livro</label>
+        <input type="text" name="titulo" id="titulo" maxlength="150" required>
+    </div>
+     <div class="campo">
+        <label>ano do livro</label>
+        <input type="text" name="ano" id="ano">
+    </div>
+    <div class="campo">
+        <label class="auth">nome do autor</label>
+        <input type="text" name="autor" id="autor" maxlength="100" required>
+    </div>
+    <div class="campo">
+        <label class="auth">isbn do livro</label>
+        <input type="text" name="isbn" id="isbn" maxlength="13" />
+    </div>
+     <div class="campo">
+  <label>gênero do livro</label>
+  <select id="genero" name="genero" multiple>
+      <option value="ficcao">Ficção</option>
+      <option value="romance">Romance</option>
+      <option value="fantasia">Fantasia</option>
+      <option value="aventura">Aventura</option>
+      <option value="terror">Terror</option>
+      <option value="suspense">Suspense</option>
+      <option value="mistério">Mistério</option>
+      <option value="ficcao_cientifica">Ficção Científica</option>
+      <option value="distopia">Distopia</option>
+      <option value="drama">Drama</option>
+      <option value="comedia">Comédia</option>
+      <option value="poesia">Poesia</option>
+      <option value="biografia">Biografia</option>
+      <option value="autobiografia">Autobiografia</option>
+      <option value="autoajuda">Autoajuda</option>
+      <option value="espiritualidade">Espiritualidade</option>
+      <option value="filosofia">Filosofia</option>
+      <option value="psicologia">Psicologia</option>
+      <option value="sociologia">Sociologia</option>
+      <option value="politica">Política</option>
+      <option value="historia">História</option>
+      <option value="classico">Clássico</option>
+      <option value="educacao">Educação</option>
+      <option value="didatico">Didático</option>
+      <option value="cientifico">Científico</option>
+      <option value="religiao">Religião</option>
+      <option value="negocios">Negócios</option>
+      <option value="economia">Economia</option>
+      <option value="tecnologia">Tecnologia</option>
+      <option value="informatica">Informática</option>
+      <option value="matematica">Matemática</option>
+      <option value="fisica">Física</option>
+      <option value="quimica">Química</option>
+      <option value="biologia">Biologia</option>
+      <option value="saude">Saúde</option>
+      <option value="culinaria">Culinária</option>
+      <option value="infantil">Infantil</option>
+      <option value="juvenil">Juvenil</option>
+      <option value="hq_manga">HQs / Mangás</option>
+      <option value="arte">Arte</option>
+      <option value="fotografia">Fotografia</option>
+      <option value="viagem">Viagem</option>
+      <option value="esporte">Esporte</option>
+      <option value="ensaios">Ensaios</option>
+      <option value="cronicas">Crônicas</option>
+      <option value="contos">Contos</option>
+      <option value="literatura_brasileira">Literatura Brasileira</option>
+      <option value="literatura_estrangeira">Literatura Estrangeira</option>
+  </select>
+  <small>(segure Ctrl para selecionar mais de um gênero)</small>
+</div>
+
+    <div class="campo">
+        <label>preço do livro</label>
+        <input type="text" name="preco" id="preco"  required min="1">
+    </div>
+    <div class="campo">
+        <label>descrição do livro</label>
+        <input type="text" name="descricao" id="descricao">
+    </div>
+
+    <div class="campo">
+        <label>imagem do livro</label>
+        <input type="text" name="imagem" id="imagem">
+    </div>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+    <button class="botao" type="submit">cadastrar livro</button>
+</form>
+
+  </body>
+</html>

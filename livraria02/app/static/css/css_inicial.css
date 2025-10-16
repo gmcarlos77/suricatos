@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Lora", serif;
+}
+
+body{
+    font-family: 'arial';
+    background-color: #2c2c2c;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header-inner-content{
+    max-width: 1300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-inner-content{
+    max-width: 1280px;
+    margin: 0 auto;
+    min-height: 400px;
+}
+
+.header-inner-content a{
+    text-decoration: none;
+    color:#fff;
+}
+
+.navdiv{
+    background-color: #2c2c2c;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    box-shadow: 10px 0px 10px #2c2c2c;
+    z-index: 99;
+}
+
+.navdiv>div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo{
+    color: #0084ff;
+}
+
+.logo span{
+    color: #fff;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.nav-icon-container{
+    display: flex;
+    align-items: center;
+}
+
+.nav-icon-container img{
+    width: 30px;
+    cursor: pointer;
+}
+
+.nav-icon-container img:first-child{
+    margin-right: 1rem;
+}
+
+nav ul li{
+    color: #fff;
+    margin-right: 1.5rem;
+    cursor: pointer;
+}
+
+nav ul li:hover{
+    transform: translateY(-5px);
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+.menu-button{
+    display: none;
+}
+
+/* ===============================
+   BARRA DE PESQUISA + CONTA
+=================================*/
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#pesquisa {
+    display: flex;
+    align-items: center;
+}
+
+#pesquisa input[type="text"] {
+    padding: 0.4rem 0.8rem;
+    border-radius: 9999px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+#pesquisa button {
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    border: none;
+    background-color: #0084ff;
+    color: white;
+    margin-left: 0.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#pesquisa button:hover {
+    background-color: #004C94;
+}
+
+/* ===============================
+   HEADER
+=================================*/
+header{
+    background-image: radial-gradient(#fff, #c7c7c7);
+}
+
+.header-bottom-side{
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    padding: 1rem;
+}
+
+.header-bottom-side-left{
+    height: 100%;
+    flex-basis: 50%;
+}
+
+.header-bottom-side h2{
+    font-size: 3.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.header-bottom-side-left p{
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.header-bottom-side-left button{
+    background-color: #0084ff;
+    border: none;
+    cursor:pointer;
+    padding: 0.8rem 3.8rem;
+    border-radius: 9999px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.header-bottom-side-left button:hover{
+    background-color: #004C94;
+}
+
+.header-bottom-side-right{
+    flex-basis: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header-bottom-side-right img{
+    width: 48%;
+    animation: 2s;
+    animation-direction: alternate-reverse;
+}
+
+/* ===============================
+   RESPONSIVIDADE
+=================================*/
+@media (max-width:800px){
+    .logo{
+        font-size: 1.2rem;
+    }
+    .menu-button{
+        display:block;
+    }
+
+    .header-bottom-side{
+        flex-direction: column;
+        text-align: center;
+        padding-top: 4rem;
+    }
+
+    nav{
+        position: absolute;
+        background: #2c2c2c;
+        width: 100%;
+        top: 46px;
+        display: none;
+    }
+
+    .show-menu nav{
+        display: block;
+    }
+
+    nav ul{
+        flex-direction: column;
+    }
+
+    nav ul li{
+        text-align: center;
+        padding: 0.8rem;
+    }
+
+    .nav-right {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    #pesquisa {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #pesquisa input[type="text"] {
+        width: 60%;
+    }
+
+    #pesquisa button {
+        width: auto;
+    }
+}
+
+/* ===============================
+   MAIN & PRODUTOS
+=================================*/
+main{
+    background-color: #ebebeb;
+}
+
+.gray-background{
+    background-color: #2c2c2c;
+}
+
+/* ===============================
+   TÍTULOS E SEÇÃO
+=================================*/
+.section-title{
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 1.8rem;
+}
+
+.section-title a{
+    text-decoration: none;
+    color: black;
+}
+
+.subtitle-underline{
+    width: 100px;
+    height: 5px;
+    background: #0084ff;
+    border-radius: 9999px;
+    margin: 8px auto 0 auto;
+}
+
+/* ===============================
+   PRODUTOS / LIVROS
+=================================*/
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 por linha */
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    height: 350px; /* altura uniforme */
+}
+
+.product img {
+    width: 100%;
+    max-width: 200px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.product h1 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.product h3 {
+    margin: 2px 0;
+    color: #555;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+/* ===============================
+   RESPONSIVIDADE PRODUTOS
+=================================*/
+@media (max-width: 1200px) {
+    .products-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .products-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .products-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===============================
+   RODAPÉ
+=================================*/
+.footer-content{
+    display: block;
+    align-items: center;
+    text-align: center;
+    color:#0084ff;
+}
+
+.links-footer{
+    color: white;
+}
+
+.links-footer a{
+    color: white;
+}
+
+/* ===============================
+   OUTROS AJUSTES
+=================================*/
+.product-name {
+    font-size: 18px;
+    text-align: center;
+}
+
+.product img {
+    object-fit: cover;
+}
+
+.aviso{
+    justify-content: center;
+}
+
+
+.mind{
+    color:#ebebeb
+
+}
+
+.mindp{
+    color:#ebebeb
+}
