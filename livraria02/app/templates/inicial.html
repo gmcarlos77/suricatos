@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catálogo - Toca Literária</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/css_inicial.css') }}">
+</head>
+<body>
+    <!-- Navegação -->
+    <div class="navdiv">
+        <div class="header-inner-content">
+            <h1 class="logo">Toca <span>Literária</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('login.tela_login') }}">Usuário</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropbtn">Livros</a>
+                        <ul class="dropdown-content">
+                            <li><a href="{{ url_for('destaque.livros_por_genero', genero='todos') }}">Todos</a></li>
+                            <li><a href="{{ url_for('destaque.livros_por_genero', genero='ficcao') }}">Ficção</a></li>
+                            <li><a href="{{ url_for('destaque.livros_por_genero', genero='nao-ficcao') }}">Não Ficção</a></li>
+                            <li><a href="{{ url_for('destaque.livros_por_genero', genero='fantasia') }}">Fantasia</a></li>
+                            <li><a href="{{ url_for('destaque.livros_por_genero', genero='autoajuda') }}">Autoajuda</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="nav-icon-container">
+                <a href="em-breve.html"><img src="{{ url_for('static', filename='img/cart.png') }}" alt="Carrinho"></a>
+                <img src="{{ url_for('static', filename='img/menu.png') }}" class="menu-button" alt="Menu">
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header--inner-content">
+            <div class="header-bottom-side">
+                <div class="header-bottom-side-left">
+                    <h2>LEIA, APRENDA, DESCUBRA.</h2>
+                    <p>
+                        Explore um acervo completo de livros, tudo ao seu alcance
+                        a qualquer hora e em qualquer lugar. Aqui, o conhecimento está a apenas
+                        um clique de distância. Boa leitura!
+                    </p>
+                    <button id="rolar">Ver agora</button>
+                </div>
+                <div class="header-bottom-side-right">
+                    <img src="{{ url_for('static', filename='img/harry.png') }}" alt="Imagem Harry">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Seção livros dinâmica -->
+        <div class="page-inner-content">
+            <h3 class="section-title"><a href="{{ url_for('destaque.inicial') }}">Início</a></h3>
+            <div class="subtitle-underline"></div>
+
+            <div class="products-container">
+                {% if livros %}
+                    {% for livro in livros %}
+                        <div class="product">
+                            <a href="{{ url_for('destaque.tela_compra', titulo=livro.titulo) }}">
+                                <img src="{{ url_for('static', filename='img/' + livro.imagem) }}" alt="{{ livro.titulo }}">
+                            </a>
+                            <h1>{{ livro.titulo }}</h1>
+                            <h3>Preço: R$ {{ livro.preco }}</h3>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="aviso">Nenhum livro encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="gray-background">
+        <div class="page-inner-content footer-content">
+            <div class="logo-footer">
+                <h1 class="logo">Toca <span>Literária</span></h1>
+                <br>
+                <p>A MELHOR LIVRARIA DO BRASIL</p>
+                <br>
+            </div>
+            <div class="links-footer">
+                <h3>Links úteis</h3>
+                <ul>
+                    <li><a href="em-breve.html">Cupons</a></li>
+                    <li><a href="em-breve.html">Blog Posts</a></li>
+                    <li><a href="em-breve.html">Políticas</a></li>
+                    <li><a href="em-breve.html">Sobre</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const navdiv = document.querySelector(".navdiv");
+        const menuButton = document.querySelector(".menu-button");
+
+        menuButton.addEventListener("click", () => {
+            navdiv.classList.toggle("show-menu");
+        });
+
+        const botaoRolar = document.getElementById('rolar');
+        botaoRolar.addEventListener('click', function () {
+            const posicaoAtual = window.pageYOffset;
+            const alturaJanela = window.innerHeight;
+            const destino = posicaoAtual + (alturaJanela * 0.30);
+            window.scrollTo({ top: destino, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

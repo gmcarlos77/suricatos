@@ -1,0 +1,77 @@
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Corpo da página - layout flex vertical, centralizado */
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      font-size: 1em;
+      color: black;
+
+      display: flex;
+      flex-direction: column; /* empilha verticalmente */
+      align-items: center;    /* centraliza horizontalmente */
+      justify-content: center; /* centraliza verticalmente */
+      height: 100vh;           /* altura total da janela */
+      padding: 20px;
+    }
+
+    /* Título centralizado */
+    #title {
+      margin-bottom: 20px;
+      font-size: 2em;
+      text-align: center;
+      color: black;
+    }
+
+    /* Estilo do formulário */
+    form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 350px;
+    }
+
+    /* Espaço entre os campos */
+    .campo {
+      margin-bottom: 1rem;
+    }
+
+    /* Label dos campos */
+    .campo label {
+      display: block;
+      margin-bottom: 0.3em;
+      color: black;
+      font-weight: 600;
+    }
+
+    /* Inputs, selects e textarea com largura total */
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 0.5em;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+
+    /* Botão estilizado */
+    .botao {
+      width: 100%;
+      background-color: black;
+      color: white;
+      font-size: 1.2em;
+      padding: 0.6em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .botao:hover {
+      background-color: blue;
+    }
+    

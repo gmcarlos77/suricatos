@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Checkout Completo com Avisos</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    padding: 20px;
+  }
+  form {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .input-box {
+    margin-bottom: 15px;
+  }
+  .input-box span {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+  }
+  .input-box input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  .mensagem-erro {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    min-height: 18px;
+  }
+  #pagamento-cartao, #pagamento-pix {
+    display: none;
+    margin-top: 10px;
+  }
+  .botoes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #0084ff;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #005bb5;
+  }
+  button.toggle-btn {
+    margin-right: 10px;
+    flex: 1;
+  }
+  button.toggle-btn.active {
+    background-color: #005bb5;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+
+<form id="formulario" onsubmit="return validarFormulario(event)">
+
+  <div class="input-box">
+    <span>Nome Completo:</span>
+    <input type="text" id="nome" required />
+    <div id="erro-nome" class="mensagem-erro"></div>
+  </div>
+
+  <div class="input-box">
+    <span>Email:</span>
+    <input type="email" id="email" required />
+    <div id="erro-email" class="mensagem-erro"></div>
+  </div>
+
+  <div class="input-box">
+    <span>CPF:</span>
+    <input
+      type="text"
+      id="cpf"
+      maxlength="11"
+      placeholder="Somente números"
+      required
+      oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+    />
+    <div id="erro-cpf" class="mensagem-erro"></div>
+  </div>
+
+  <div class="input-box">
+    <span>CEP:</span>
+    <input
+      type="text"
+      id="cep"
+      maxlength="8"
+      placeholder="12345678"
+      required
+      oninput="this.value=this.value.replace(/[^0-9]/g,''); validarCepAoDigitar()"
+    />
+    <div id="erro-cep" class="mensagem-erro"></div>
+  </div>
+
+  <div class="botoes">
+    <button type="button" id="btn-cartao" class="toggle-btn active" onclick="mostrarCartao()">Cartão</button>
+    <button type="button" id="btn-pix" class="toggle-btn" onclick="mostrarPix()">PIX</button>
+  </div>
+
+  <div id="pagamento-cartao" style="display:block;">
+    <div class="input-box">
+      <span>Nome no Cartão:</span>
+      <input type="text" id="nome-cartao" required />
+      <div id="erro-nome-cartao" class="mensagem-erro"></div>
+    </div>
+
+    <div class="input-box">
+      <span>Número do Cartão:</span>
+      <input
+        type="text"
+        id="numero-cartao"
+        maxlength="19"
+        placeholder="1111222233334444"
+        required
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+      />
+      <div id="erro-numero-cartao" class="mensagem-erro"></div>
+    </div>
+
+    <div class="input-box">
+      <span>Data de Validade:</span>
+      <input
+        type="month"
+        id="validade-cartao"
+        required
+        onchange="validarValidadeCartao()"
+      />
+      <div id="erro-validade" class="mensagem-erro"></div>
+    </div>
+
+    <div class="input-box">
+      <span>CVV:</span>
+      <input
+        type="text"
+        id="cvv"
+        maxlength="3"
+        required
+        oninput="this.value=this.value.replace(/[^0-9]/g,'')"
+        placeholder="123"
+      />
+      <div id="erro-cvv" class="mensagem-erro"></div>
+    </div>
+  </div>
+
+  <div id="pagamento-pix">
+    <div class="input-box">
+      <span>QR Code:</span>
+      <img src="qrcode-pix.png" alt="QR Code Pix" style="width:150px; height:150px;" />
+    </div>
+    <div class="input-box">
+      <span>Código Copia e Cola:</span>
+      <input type="text" readonly value="00020126700014br.gov.bcb.pix0114+559999999999..." />
+    </div>
+  </div>
+
+  <button type="submit" style="margin-top:20px;">Finalizar Pagamento</button>
+</form>
+
+<script>
+  function mostrarCartao() {
+    document.getElementById('pagamento-cartao').style.display = 'block';
+    document.getElementById('pagamento-pix').style.display = 'none';
+    document.getElementById('btn-cartao').classList.add('active');
+    document.getElementById('btn-pix').classList.remove('active');
+  }
+
+  function mostrarPix() {
+    document.getElementById('pagamento-cartao').style.display = 'none';
+    document.getElementById('pagamento-pix').style.display = 'block';
+    document.getElementById('btn-pix').classList.add('active');
+    document.getElementById('btn-cartao').classList.remove('active');
+  }
+
+  function validarNome() {
+    const nome = document.getElementById('nome').value.trim();
+    const erro = document.getElementById('erro-nome');
+    if (nome === '') {
+      erro.textContent = "⚠️ Por favor, preencha o nome completo.";
+      return false;
+    }
+    erro.textContent = '';
+    return true;
+  }
+
+  function validarEmail() {
+    const email = document.getElementById('email').value.trim();
+    const erro = document.getElementById('erro-email');
+    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regexEmail.test(email)) {
+      erro.textContent = "⚠️ Por favor, insira um email válido.";
+      return false;
+    }
+    erro.textContent = '';
+    return true;
+  }
+
+  function validarCPF() {
+    const cpf = document.getElementById('cpf').value.trim();
+    const erro = document.getElementById('erro-cpf');
+
+    if (cpf.length !== 11) {
+      erro.textContent = "⚠️ CPF deve conter 11 dígitos.";
+      return false;
+    }
+
+    if (/^(\d)\1+$/.test(cpf)) {
+      erro.textContent = "⚠️ CPF inválido.";
+      return false;
+    }
+
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = (soma * 10) % 11;
+    if (resto === 10) resto = 0;
+    if (resto !== parseInt(cpf.charAt(9))) {
+      erro.textContent = "⚠️ CPF inválido.";
+      return false;
+    }
+
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = (soma * 10) % 11;
+    if (resto === 10) resto = 0;
+    if (resto !== parseInt(cpf.charAt(10))) {
+      erro.textContent = "⚠️ CPF inválido.";
+      return false;
+    }
+
+    erro.textContent = '';
+    return true;
+  }
+
+  function validarCepAoDigitar() {
+    const cep = document.getElementById('cep').value.trim();
+    const erroCep = document.getElementById('erro-cep');
+    if (cep.length > 0 && !/^\d{8}$/.test(cep)) {
+      erroCep.textContent = "⚠️ O CEP deve conter exatamente 8 dígitos.";
+      return false;
+    } else {
+      erroCep.textContent = "";
+      return true;
+    }
+  }
+
+  function validarValidadeCartao() {
+    const input = document.getElementById("validade-cartao");
+    const erro = document.getElementById("erro-validade");
+    const valor = input.value;
+
+    if (!valor) {
+      erro.textContent = "Informe a data de validade.";
+      return false;
+    }
+
+    const [ano, mes] = valor.split("-").map(Number);
+
+    if (mes < 1 || mes > 12) {
+      erro.textContent = "Mês inválido. Deve ser entre 01 e 12.";
+      return false;
+    }
+
+    const hoje = new Date();
+    const dataValidade = new Date(ano, mes - 1, 1);
+    const mesAtual = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+
+    if (dataValidade < mesAtual) {
+      erro.textContent = "A data de validade não pode ser menor que o mês atual.";
+      return false;
+    }
+
+    erro.textContent = "";
+    return true;
+  }
+
+  function validarFormulario(event) {
+    event.preventDefault();
+    let valido = true;
+
+    if (!validarNome()) valido = false;
+    if (!validarEmail()) valido = false;
+    if (!validarCPF()) valido = false;
+    if (!validarCepAoDigitar()) valido = false;
+
+    if (document.getElementById('pagamento-pix').style.display === 'block') {
+      if (valido) {
+        alert("Formulário enviado com sucesso (Pix)!");
+        event.target.submit();
+      }
+      return valido;
+    }
+
+    const nomeCartao = document.getElementById('nome-cartao').value.trim();
+    if (nomeCartao === '') {
+      document.getElementById('erro-nome-cartao').textContent = "⚠️ Preencha o nome no cartão.";
+      valido = false;
+    } else {
+      document.getElementById('erro-nome-cartao').textContent = "";
+    }
+
+    const numeroCartao = document.getElementById('numero-cartao').value.trim();
+    if (!/^\d{13,19}$/.test(numeroCartao)) {
+      document.getElementById('erro-numero-cartao').textContent = "⚠️ Número do cartão inválido (13 a 19 dígitos).";
+      valido = false;
+    } else {
+      document.getElementById('erro-numero-cartao').textContent = "";
+    }
+
+    if (!validarValidadeCartao()) valido = false;
+
+    const cvv = document.getElementById('cvv').value.trim();
+    if (!/^\d{3}$/.test(cvv)) {
+      document.getElementById('erro-cvv').textContent = "⚠️ CVV deve ter exatamente 3 dígitos.";
+      valido = false;
+    } else {
+      document.getElementById('erro-cvv').textContent = "";
+    }
+
+    if (valido) {
+      alert("Formulário enviado com sucesso!");
+      event.target.submit();
+    }
+
+    return valido;
+  }
+</script>
+
+</body>
+</html>

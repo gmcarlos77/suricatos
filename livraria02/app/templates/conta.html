@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Conta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/usuario.css') }}">
+</head>
+<body>
+     <div class="navdiv">
+        <div class="header-inner-content">
+            <h1 class="logo">Toca <span>Literaria</span></h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('inicial') }}">conta</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icon-container">
+
+                <img src="menu.png" class="menu-button">
+            </div>
+        </div>
+    </div>
+    <header>
+        <h1>Bem-vindo, {{ nome }}!</h1>
+    </header>
+
+    <section>
+        <h2>Informações da Conta</h2>
+        <ul>
+            <li><strong>Nome:</strong> {{ nome }}</li>
+            <li><strong>Email:</strong> {{ email }}</li>
+        </ul>
+    </section>
+    
+
+    <a href="{{ url_for('logout') }}">Sair</a>
+</body>
+</html>
